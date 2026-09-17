@@ -74,17 +74,17 @@ const ProductListPage: React.FC = () => {
   return (
     <main className="overflow-x-auto p-4">
       <Dialog dialogRef={dialogRef}>
-        {action === 'delete' && (
+        {action === 'delete' && product && (
           <ProductDeleteForm
-            product={product!}
+            product={product}
             isMutating={isMutating}
             deleteProduct={handleDelete}
             closeDialog={handleCloseDialog}
           />
         )}
-        {action === 'edit' && (
+        {action === 'edit' && product && (
           <ProductEditForm
-            product={product!}
+            product={product}
             isMutating={isMutating}
             editProduct={handleEdit}
             closeDialog={handleCloseDialog}
