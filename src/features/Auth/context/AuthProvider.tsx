@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [state, setState] = useState(initialState)
 
   useEffect(() => {
-    checkAuth().catch(() => {})
+    void checkAuth()
   }, [])
 
   const login = async (email: string, password: string): Promise<boolean> => {
