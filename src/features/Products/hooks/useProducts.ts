@@ -20,17 +20,12 @@ export const useProducts = (): UseProducts => {
 	const revalidator = useRevalidator()
 
 	const token = localStorage.getItem('accessToken')
-	if (!token) {
-		return {
-			isMutating: false,
-			error: null,
-			addProduct: async () => {},
-			updateProduct: async () => {},
-			deleteProduct: async () => {},
-		}
-	}
 
 	const addProduct = async (product: ProductCreateDTO): Promise<void> => {
+		if (!token) {
+			setError('Not authenticated')
+			return
+		}
 		try {
 			setError(null)
 			setIsMutating(true)
@@ -43,6 +38,10 @@ export const useProducts = (): UseProducts => {
 	}
 
 	const updateProduct = async (product: Product): Promise<void> => {
+		if (!token) {
+			setError('Not authenticated')
+			return
+		}
 		try {
 			setError(null)
 			setIsMutating(true)
@@ -55,6 +54,10 @@ export const useProducts = (): UseProducts => {
 	}
 
 	const deleteProduct = async (id: string) => {
+		if (!token) {
+			setError('Not authenticated')
+			return
+		}
 		try {
 			setError(null)
 			setIsMutating(true)
