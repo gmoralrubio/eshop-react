@@ -25,6 +25,8 @@ export async function parseErrorResponse(
 	try {
 		const body = await response.json()
 		serverMessage = body.message || null
-	} catch {}
+	} catch {
+		// Response body is not JSON; keep the fallback message.
+	}
 	throw new Error(serverMessage || fallback)
 }
