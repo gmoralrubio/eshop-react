@@ -1,0 +1,29 @@
+import { useAuth } from '@features/Auth/hooks/useAuth'
+import { Navigate } from 'react-router'
+
+interface ProtectedRouteProps {
+  children: React.ReactNode
+}
+
+export function ProtectedRoute({ children }: ProtectedRouteProps) {
+  const { isAuthenticated, isLoading } = useAuth()
+
+  if (isLoading) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        Loading...
+      </div>
+    )
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <Navigate
+        to="/auth/login"
+        replace
+      />
+    )
+  }
+
+  return children
+}
